@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>House Edge — Party Table</title>
+<style>
+:root{--bg:#101411;--panel:#1a211d;--line:#354238;--cream:#f4f0df;--muted:#a8b4a6;--green:#b9f36b;--gold:#f0c66b;--red:#ff8179}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at top,#25372b 0,#101411 52%);color:var(--cream);font-family:ui-sans-serif,system-ui,-apple-system,Segoe UI,sans-serif;min-height:100vh}
+button,input,select{font:inherit}button{cursor:pointer;border:0;border-radius:12px;padding:12px 16px;font-weight:800;background:var(--green);color:#142014;transition:transform .12s,filter .12s}button:hover{filter:brightness(1.06);transform:translateY(-1px)}button:disabled{opacity:.35;cursor:not-allowed;transform:none}.secondary{background:#303b33;color:var(--cream);border:1px solid #48584b}.danger{background:#55302e;color:#ffd5d1;border:1px solid #814743}
+.wrap{max-width:1100px;margin:auto;padding:26px 18px 40px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}.brand{display:flex;align-items:center;gap:12px}.mark{height:44px;width:44px;border-radius:14px;background:var(--green);color:#142014;display:grid;place-items:center;font-size:25px;font-weight:1000;box-shadow:0 8px 30px #b9f36b24}.brand h1{font-size:20px;letter-spacing:.12em;margin:0}.brand p{margin:3px 0 0;color:var(--muted);font-size:12px;letter-spacing:.12em;text-transform:uppercase}.pill{border:1px solid var(--line);padding:8px 11px;border-radius:999px;color:var(--muted);font-size:12px}.panel{background:linear-gradient(145deg,#202a23,#171d19);border:1px solid var(--line);border-radius:20px;padding:22px;box-shadow:0 16px 60px #0002}.hero{max-width:690px;margin:7vh auto 0;text-align:center}.eyebrow{color:var(--green);text-transform:uppercase;letter-spacing:.2em;font-size:11px;font-weight:900}.hero h2{font-size:clamp(36px,7vw,68px);line-height:.98;letter-spacing:-.055em;margin:15px 0}.hero h2 span{color:var(--green)}.sub{color:var(--muted);line-height:1.6;max-width:500px;margin:0 auto 25px}.row{display:flex;gap:10px;flex-wrap:wrap}.row>*{flex:1}.field{text-align:left;margin:12px 0}.field label{display:block;color:var(--muted);font-size:12px;font-weight:800;margin:0 0 7px;text-transform:uppercase;letter-spacing:.08em}.field input,.field select{width:100%;padding:13px 14px;background:#111713;border:1px solid #3a493d;color:var(--cream);border-radius:11px;outline:none}.field input:focus,.field select:focus{border-color:var(--green)}.tiny{font-size:12px;color:var(--muted);line-height:1.5}.hidden{display:none!important}.lobbygrid{display:grid;grid-template-columns:1.15fr .85fr;gap:16px}.sectionhead{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:15px}.sectionhead h3{margin:0;font-size:18px}.count{color:var(--green);font-size:12px;font-weight:900}.players{display:grid;gap:9px}.player{display:flex;align-items:center;gap:11px;background:#111713;border:1px solid #2d392f;padding:12px;border-radius:13px}.avatar{height:38px;width:38px;flex:0 0 38px;border-radius:12px;background:#334336;display:grid;place-items:center;font-weight:900;color:var(--green)}.pinfo{min-width:0;flex:1}.pname{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.pmeta{font-size:12px;color:var(--muted);margin-top:3px}.stack{font-weight:900;color:var(--gold);white-space:nowrap}.hosttag{font-size:10px;color:var(--green);margin-left:5px}.status{display:flex;align-items:center;gap:8px;color:var(--muted);font-size:12px}.dot{height:7px;width:7px;background:var(--green);border-radius:50%;box-shadow:0 0 10px #b9f36b55}.notice{padding:13px 15px;border-radius:12px;background:#b9f36b12;border:1px solid #b9f36b33;color:#dff8c6;line-height:1.5;font-size:14px;margin-bottom:15px}.tabletop{text-align:center;padding:18px 0 24px}.roundlabel{color:var(--muted);text-transform:uppercase;letter-spacing:.16em;font-size:11px;font-weight:900}.pot{font-size:clamp(42px,8vw,70px);font-weight:1000;letter-spacing:-.05em;color:var(--gold);margin:5px}.pot small{font-size:14px;letter-spacing:0;color:var(--muted)}.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin:18px 0}.card{border:1px solid var(--line);background:#111713;border-radius:16px;padding:15px 13px;text-align:center;min-height:130px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px}.card .emoji{font-size:30px}.card b{font-size:14px}.card p{margin:0;color:var(--muted);font-size:11px;line-height:1.45}.choicegrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.choice{padding:17px;text-align:left;background:#18241b;color:var(--cream);border:1px solid #526c4d;border-radius:16px}.choice.selected{outline:2px solid var(--green);background:#243823}.choice .big{font-size:24px;margin-bottom:7px}.choice b{display:block;font-size:16px}.choice small{display:block;color:var(--muted);margin-top:5px;line-height:1.4}.betrow{display:flex;align-items:center;gap:12px;margin:16px 0}.betrow input{width:100%;accent-color:var(--green)}.betnum{min-width:90px;text-align:right;font-weight:900;color:var(--gold)}.resultroll{display:flex;gap:5px;justify-content:center}.die{display:grid;place-items:center;width:38px;height:38px;border-radius:9px;background:var(--cream);color:#182019;font-weight:1000;font-size:20px}.player.winner{border-color:var(--green);box-shadow:inset 0 0 0 1px #b9f36b33}.footer{margin:18px 0 0;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;color:var(--muted);font-size:11px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#f4f0df;color:#111713;padding:12px 18px;border-radius:12px;font-weight:800;box-shadow:0 10px 35px #0005;z-index:5;max-width:90%;text-align:center}.toast:empty{display:none}.code{font-size:24px;letter-spacing:.18em;font-weight:1000;color:var(--green)}@media(max-width:700px){.lobbygrid{grid-template-columns:1fr}.wrap{padding:18px 12px}.panel{padding:17px}.top{align-items:flex-start}.pill{font-size:10px}.choicegrid{grid-template-columns:1fr 1fr}.hero{margin-top:4vh}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header class="top">
+ <div class="brand"><div class="mark">♠</div><div><h1>HOUSE EDGE</h1><p>Party Table · Fictional Chips Only</p></div></div>
+ <div class="pill" id="connection">● Connecting…</div>
+</header>
+<main id="home" class="hero">
+ <div class="eyebrow">The table is open</div>
+ <h2>PLAY YOUR<br><span>ODDS.</span></h2>
+ <p class="sub">Read the room. Pick your risk. Take the pot. A fast, competitive multiplayer game for friends — no real money, just bragging rights.</p>
+ <div class="panel" style="text-align:left">
+  <div class="field"><label>Your table name</label><input id="name" maxlength="18" placeholder="e.g. Ace" autocomplete="nickname"></div>
+  <div class="row"><button id="create">Create a room</button><button id="showJoin" class="secondary">Join with code</button></div>
+  <div id="joinFields" class="hidden">
+   <div class="field"><label>Room code</label><input id="roomCode" maxlength="5" placeholder="ABCDE" style="text-transform:uppercase;letter-spacing:.18em;font-weight:900"></div>
+   <button id="join" style="width:100%">Join table</button>
+  </div>
+  <div class="field"><label>Game length (host only)</label><select id="rounds"><option value="3">Quick game · 3 rounds</option><option value="5" selected>Standard · 5 rounds</option><option value="10">Long game · 10 rounds</option></select></div>
+  <p class="tiny">2–8 players · Each player starts with 1,000 fictional chips · Best stack at the end wins.</p>
+ </div>
+</main>
+
+<section id="room" class="hidden">
+ <div class="panel" style="margin-bottom:16px">
+  <div class="sectionhead"><div><div class="eyebrow">Private table</div><h3 style="margin-top:6px">Room <span class="code" id="code">-----</span></h3></div><button class="secondary" id="copy">Copy invite code</button></div>
+  <div class="notice" id="message">Waiting for players…</div>
+  <div id="lobbyControls" class="row"><button id="start">Start game</button><button class="secondary" id="leave">Leave table</button></div>
+ </div>
+ <div id="gameboard" class="hidden">
+  <div class="panel">
+   <div class="tabletop"><div class="roundlabel" id="roundlabel">ROUND 1 OF 5</div><div class="pot" id="pot">0 <small>CHIPS IN THE POT</small></div><div class="tiny" id="phasehelp">Choose your stake and risk style.</div></div>
+   <div id="betControls">
+    <div class="choicegrid">
+     <button class="choice selected" data-choice="steady"><div class="big">🎯</div><b>Steady</b><small>Roll two dice. Play it straight.</small></button>
+     <button class="choice" data-choice="bold"><div class="big">⚡</div><b>Bold</b><small>Risk it for a +2 score bonus.</small></button>
+    </div>
+    <div class="betrow"><input id="bet" type="range" min="10" max="1000" step="10" value="100"><div class="betnum"><span id="betvalue">100</span><br><span class="tiny">CHIPS</span></div></div>
+    <div class="row"><button id="lock">Lock in stake</button><button class="secondary" id="fold">Sit this round out</button></div>
+    <p class="tiny">All stakes are fictional chips. Your dice roll is generated by the server after you lock in.</p>
+   </div>
+   <div id="waiting" class="hidden notice">You're locked in. Waiting for the other players…</div>
+   <div id="results" class="hidden">
+    <div class="cards" id="resultcards"></div>
+    <div class="row"><button id="next">Next round</button><button id="again" class="hidden">Play again</button></div>
+   </div>
+  </div>
+ </div>
+ <div class="lobbygrid" style="margin-top:16px">
+  <div class="panel"><div class="sectionhead"><h3>At the table</h3><span class="count" id="playercount">1 / 8</span></div><div class="players" id="players"></div></div>
+  <div class="panel"><div class="sectionhead"><h3>How to play</h3></div>
+   <div class="cards" style="grid-template-columns:1fr 1fr">
+    <div class="card"><div class="emoji">🪙</div><b>Stake</b><p>Choose how many chips to put in.</p></div>
+    <div class="card"><div class="emoji">🎲</div><b>Roll</b><p>Two server-rolled dice decide your score.</p></div>
+    <div class="card"><div class="emoji">⚡</div><b>Go bold</b><p>Bold adds +2 to your score.</p></div>
+    <div class="card"><div class="emoji">🏆</div><b>Win the pot</b><p>Highest score splits the pot on ties.</p></div>
+   </div>
+   <p class="tiny">A round ends when everyone has locked in. The host controls the pace between rounds. Chips are game points only and cannot be bought or cashed out.</p>
+  </div>
+ </div>
+</section>
+<div class="footer"><span>HOUSE EDGE · FRIENDS ONLY</span><span>Skill, luck, and a little nerve.</span></div>
+</div>
+<div id="toast" class="toast"></div>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+const socket = io();
+let roomCode = null, state = null, selectedChoice = "steady", myId = null;
+const $ = id => document.getElementById(id);
+function toast(msg){$("toast").textContent=msg;clearTimeout(toast.t);toast.t=setTimeout(()=>$("toast").textContent="",3000)}
+socket.on("connect",()=>{$("connection").textContent="● Connected";$("connection").style.color="var(--green)";myId=socket.id});
+socket.on("disconnect",()=>{$("connection").textContent="● Reconnecting…";$("connection").style.color="var(--gold)"});
+socket.on("toast",toast);
+$("showJoin").onclick=()=>{$("joinFields").classList.toggle("hidden");$("roomCode").focus()};
+function playerName(){return $("name").value.trim()||"Player"}
+$("create").onclick=()=>socket.emit("createRoom",{name:playerName(),maxRounds:Number($("rounds").value)},res=>{if(!res?.ok)return toast("Couldn't create a room.");roomCode=res.code;enterRoom()});
+$("join").onclick=()=>socket.emit("joinRoom",{name:playerName(),code:$("roomCode").value},res=>{if(!res?.ok)return toast(res?.error||"Couldn't join.");roomCode=res.code;enterRoom()});
+$("roomCode").addEventListener("input",e=>e.target.value=e.target.value.toUpperCase().replace(/[^A-Z2-9]/g,""));
+function enterRoom(){$("home").classList.add("hidden");$("room").classList.remove("hidden");$("code").textContent=roomCode}
+$("copy").onclick=async()=>{try{await navigator.clipboard.writeText(roomCode);toast("Room code copied! Send it to your friends.")}catch(e){toast("Your room code is "+roomCode)}};
+$("leave").onclick=()=>{location.reload()};
+$("start").onclick=()=>socket.emit("startGame",{code:roomCode});
+$("bet").oninput=()=>{$("betvalue").textContent=Number($("bet").value).toLocaleString()};
+document.querySelectorAll(".choice").forEach(btn=>btn.onclick=()=>{selectedChoice=btn.dataset.choice;document.querySelectorAll(".choice").forEach(b=>b.classList.toggle("selected",b===btn))});
+$("lock").onclick=()=>socket.emit("placeBet",{code:roomCode,amount:Number($("bet").value),choice:selectedChoice});
+$("fold").onclick=()=>socket.emit("placeBet",{code:roomCode,amount:0,choice:"fold"});
+$("next").onclick=()=>socket.emit("nextRound",{code:roomCode});
+$("again").onclick=()=>socket.emit("playAgain",{code:roomCode});
+function render(s){
+ state=s; roomCode=s.code;$("code").textContent=s.code;$("message").textContent=s.message||"";
+ $("playercount").textContent=`${s.players.filter(p=>p.connected).length} / 8`;
+ const me=s.players.find(p=>p.id===myId);
+ const isHost=s.hostId===myId;
+ $("start").classList.toggle("hidden",!isHost);
+ $("start").disabled=s.players.filter(p=>p.connected).length<2;
+ $("start").textContent=s.players.filter(p=>p.connected).length<2?"Waiting for players…":"Start game";
+ $("lobbyControls").classList.toggle("hidden",s.phase!=="lobby");
+ $("gameboard").classList.toggle("hidden",s.phase==="lobby");
+ $("roundlabel").textContent=s.phase==="finished"?"FINAL STANDINGS":`ROUND ${s.round} OF ${s.maxRounds}`;
+ $("pot").innerHTML=`${s.pot.toLocaleString()} <small>CHIPS IN THE POT</small>`;
+ const players=$("players");players.innerHTML="";
+ const sorted=[...s.players].sort((a,b)=>b.chips-a.chips);
+ sorted.forEach((p,i)=>{
+  const el=document.createElement("div");el.className="player"+(s.results?.winners?.includes(p.id)?" winner":"");
+  let dice=p.lastRoll?`<div class="resultroll"><span class="die">${p.lastRoll[0]}</span><span class="die">${p.lastRoll[1]}</span></div>`:"";
+  const label=p.connected?(p.locked?"Locked in":"At the table"):"Disconnected";
+  el.innerHTML=`<div class="avatar">${p.name.slice(0,1).toUpperCase()}</div><div class="pinfo"><div class="pname"></div><div class="pmeta">${label}${p.choice==="bold"?" · BOLD":p.choice==="fold"?" · SAT OUT":""}${p.isHost?'<span class="hosttag">HOST</span>':""}</div></div>${dice}<div class="stack">${p.chips.toLocaleString()}<div class="tiny">CHIPS</div></div>`;
+  el.querySelector(".pname").textContent=p.name+(p.id===myId?" (you)":"");
+  players.appendChild(el);
+ });
+ const myPlayer=me;
+ $("betControls").classList.toggle("hidden",s.phase!=="betting"||!myPlayer||myPlayer.locked);
+ $("waiting").classList.toggle("hidden",s.phase!=="betting"||!myPlayer||!myPlayer.locked);
+ $("results").classList.toggle("hidden",!["results","finished"].includes(s.phase));
+ $("phasehelp").textContent=s.phase==="betting"?"Choose your stake and risk style.":s.phase==="results"?"The dice are in. See who took the pot.":s.phase==="finished"?"Final stacks are in.":"";
+ $("next").classList.toggle("hidden",s.phase!=="results"||!isHost);
+ $("next").textContent=s.round>=s.maxRounds?"Show final standings":"Next round";
+ $("again").classList.toggle("hidden",s.phase!=="finished"||!isHost);
+ if(["results","finished"].includes(s.phase)){
+  const resultcards=$("resultcards");resultcards.innerHTML="";
+  sorted.forEach(p=>{
+   const c=document.createElement("div");c.className="card";
+   const won=s.results?.winners?.includes(p.id);
+   const score=p.lastRoll&&p.choice!=="fold"?p.lastRoll[0]+p.lastRoll[1]+(p.choice==="bold"?2:0):null;
+   c.innerHTML=`<div class="emoji">${won?"🏆":p.choice==="fold"?"🪑":"🎲"}</div><b></b><p>${p.choice==="fold"?"Sat out":`Stake: ${p.bet} chips`}${score!==null?`<br>Score: ${score}${p.choice==="bold"?" (+2 bold)":""}`:""}<br>Stack: ${p.chips.toLocaleString()}</p>`;
+   c.querySelector("b").textContent=p.name+(won?" · WINNER":"");
+   resultcards.appendChild(c);
+  });
+ }
+ if(s.phase==="lobby"){$("bet").max=Math.max(10,me?.chips||1000);$("bet").value=Math.min(Number($("bet").value),Number($("bet").max));$("betvalue").textContent=Number($("bet").value).toLocaleString()}
+}
+socket.on("state",render);
+</script>
+</body></html>
